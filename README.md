@@ -1,4 +1,4 @@
-# 🚀 Project Name
+# 🚀 AI-Powered Customer Recommendation Engine
 
 ## 📌 Table of Contents
 - [Introduction](#introduction)
@@ -14,7 +14,7 @@
 ---
 
 ## 🎯 Introduction
-A brief overview of your project and its purpose. Mention which problem statement are your attempting to solve. Keep it concise and engaging.
+This project is a **Streamlit-based AI-powered customer recommendation engine** that analyzes **transaction history, social media activity, and demographic details** to generate personalized recommendations using **Hugging Face Mistral-7B** and **OpenAI GPT-3.5**.
 
 ## 🎥 Demo
 🔗 [Live Demo](#) (if applicable)  
@@ -24,37 +24,66 @@ A brief overview of your project and its purpose. Mention which problem statemen
 ![Screenshot 1](link-to-image)
 
 ## 💡 Inspiration
-What inspired you to create this project? Describe the problem you're solving.
+The project was inspired by the need for **data-driven customer engagement** in e-commerce and finance, providing AI-driven product and service recommendations.
 
 ## ⚙️ What It Does
-Explain the key features and functionalities of your project.
+- **Customer Profiling**: Analyzes demographics, transactions, and social media activity.
+- **AI-Powered Recommendations**: Uses **Hugging Face Mistral-7B** and **OpenAI GPT-3.5**.
+- **Multi-Modal Personalization**: Supports text, voice, and file uploads.
+- **Real-Time Audio Input**: Uses WebRTC for capturing voice data.
+- **Chatbot Interaction**: Provides interactive, AI-powered responses.
 
 ## 🛠️ How We Built It
-Briefly outline the technologies, frameworks, and tools used in development.
+- **Frontend**: Built with **Streamlit**, featuring a user-friendly UI.
+- **Backend**: Utilizes **LangChain** for AI-powered recommendations.
+- **Models Used**: Hugging Face **Mistral-7B**, OpenAI **GPT-3.5**.
+- **Data Sources**: CSV files for **customer profiles, transactions, and social media activity**.
 
 ## 🚧 Challenges We Faced
-Describe the major technical or non-technical challenges your team encountered.
+- Integrating multi-modal inputs (text, voice, files) into a seamless experience.
+- Optimizing AI-generated recommendations for accuracy and relevance.
+- Managing API rate limits for OpenAI and Hugging Face.
 
 ## 🏃 How to Run
-1. Clone the repository  
+### Prerequisites
+Ensure you have the following installed:
+- **Python 3.8+**
+- **Streamlit**
+- **Google Cloud SDK** (for deployment if required)
+
+### Steps to Run
+1. Clone the repository:  
    ```sh
-   git clone https://github.com/your-repo.git
+   git clone https://github.com/ewfx/aidhp-code-warriors.git
+   cd aidhp-code-warriors/code/src/ai_recommendation_engine
    ```
-2. Install dependencies  
+2. Install dependencies:  
    ```sh
-   npm install  # or pip install -r requirements.txt (for Python)
+   pip install -r requirements.txt
    ```
-3. Run the project  
+3. Configure API keys in `config.ini`:
+   ```ini
+   [huggingface]
+   access_token = YOUR_HUGGINGFACE_API_KEY
+
+   [openai]
+   api_key = YOUR_OPENAI_API_KEY
+   ```
+4. Run the application:  
    ```sh
-   npm start  # or python app.py
+   streamlit run streamlitui.py
    ```
 
 ## 🏗️ Tech Stack
-- 🔹 Frontend: React / Vue / Angular
-- 🔹 Backend: Node.js / FastAPI / Django
-- 🔹 Database: PostgreSQL / Firebase
-- 🔹 Other: OpenAI API / Twilio / Stripe
+- **Frontend**: Streamlit
+- **Backend**: LangChain, Python
+- **AI Models**: Hugging Face Mistral-7B, OpenAI GPT-3.5
+- **Other**: Google Cloud Run, WebRTC
 
 ## 👥 Team
-- **Your Name** - [GitHub](#) | [LinkedIn](#)
-- **Teammate 2** - [GitHub](#) | [LinkedIn](#)
+- **Code Warriors**
+- **Veerabhadra Dharmapuri**
+- **Mounika Boorugu**
+- **Phaninder Pathri**
+- **Siva Prasad V Pakala**
+- **Vinaya R**
