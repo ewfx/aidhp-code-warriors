@@ -21,8 +21,8 @@ This project is a Streamlit application that generates personalized product and 
 
 1. Clone the repository:
     ```sh
-    git clone https://github.com/yourusername/yourrepository.git
-    cd yourrepository
+    git clone https://github.com/ewfx/aidhp-code-warriors.git
+    cd <path-to-git-clone>/aidhp-code-warriors\code\src\ai_recommendation_engine\src
     ```
 
 2. Create a virtual environment and activate it:
@@ -40,6 +40,8 @@ This project is a Streamlit application that generates personalized product and 
     ```ini
     [openai]
     api_key = your_openai_api_key
+	[huggingface]
+	access_token = your_huggingface_api_key
     ```
 
 5. Ensure the following CSV files are in the project directory:
@@ -51,5 +53,5 @@ This project is a Streamlit application that generates personalized product and 
 ## Running the Application
 
 To run the Streamlit application, execute the following command:
-```sh
-streamlit run hack_latest.py
+```
+sh streamlit run main.py
