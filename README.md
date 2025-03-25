@@ -52,12 +52,12 @@ Ensure you have the following installed:
 - **Google Cloud SDK** (for deployment if required)
 
 ### Steps to Run
-1. Clone the repository:  
+1. Clone the repository:
    ```sh
    git clone https://github.com/ewfx/aidhp-code-warriors.git
    cd aidhp-code-warriors/code/src/ai_recommendation_engine
    ```
-2. Install dependencies:  
+2. Install dependencies:
    ```sh
    pip install -r requirements.txt
    ```
@@ -69,7 +69,7 @@ Ensure you have the following installed:
    [openai]
    api_key = YOUR_OPENAI_API_KEY
    ```
-4. Run the application:  
+4. Run the application:
    ```sh
    streamlit run streamlitui.py
    ```
