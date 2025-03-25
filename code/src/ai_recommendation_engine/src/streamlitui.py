@@ -46,7 +46,7 @@ llm = ChatOpenAI(
 )
 
 # Load data
-profiles, transactions, social_media, demographics = load_customer_data()
+customer_profiles, transactions, social_media, demographics = load_customer_data()
 
 
 
