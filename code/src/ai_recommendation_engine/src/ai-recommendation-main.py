@@ -50,7 +50,6 @@ customer_profiles, transactions, social_media, demographics = load_customer_data
 
 
 
-
 prompt = PromptTemplate.from_template(base_template)
 
 # LangChain Runnable Chain
@@ -76,10 +75,10 @@ st.markdown("""
         border: 3px solid #4CAF50;
     }
     .title {
-        font-size: 25px;
-        text-align: left;
+        font-size: 30px;
+        text-align: center;
         font-weight: bold;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
     }
     .custombutton {
         background-color: #4CAF50; /* Green background */
@@ -105,8 +104,8 @@ st.markdown("""
         background-color: #4CAF50; /* Green background */
         color: white; /* White text */
         font-weight: bold; /* Bold font */
-        font-size: 25px; /* Larger font size */
-        text-align: center; /* Center alignment */
+        font-size: 20px; /* Larger font size */
+        text-align: left; /* Center alignment */
         padding: 15px; /* Padding for the title */
         border-radius: 10px 10px 0 0; /* Rounded top corners */
         width: 100%; /* Full width */
@@ -117,30 +116,9 @@ st.markdown("""
     .section-title {
         color: #4CAF50;
         font-weight: bold;
-        font-size: 20px;
-        width: 100%;
+        font-size: 25px;
         margin-bottom: 10px;
         margin-top: 15px;
-    }
-    /* Sidebar button styling */
-    .sidebar-button {
-        display: block;
-        text-align: left;
-        font-size: 16px;
-        padding: 10px 20px;
-        width: 100%; /* Full width */
-        margin-bottom: 5px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-    .sidebar-button.active {
-        background-color: #4CAF50; /* Green for active */
-        color: white;
-    }
-    .sidebar-button.inactive {
-        background-color: #F0F0F0; /* Light gray for inactive */
-        color: black;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -156,28 +134,43 @@ def render_sidebar_buttons():
     # Sidebar buttons logic
     pages = ["New Customer", "Existing Customer", "ChatBot"]
     for page in pages:
-        is_active = st.session_state["selected_page"] == page
-        button_style = f"""
-        display: block;
-        text-align: left;
-        font-size: 25px;
-        font-weight: bold;
-        padding: 10px 20px;
-        width: 100%; /* Full width */
-        margin-bottom: 5px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        background-color: {'#4CAF50' if is_active else '#F0F0F0'}; /* Green for active, gray for inactive */
-        color: {'white' if is_active else 'black'};
-        """
+        st.markdown("""
+        <style>
+        div.stButton > button {
+            color: black;
+            padding: 10px 24px;
+            font-size: 16px;
+            font-weight: 700 !important;
+            border-radius: 12px;
+            border: 2px solid #4CAF50;
+            cursor: pointer;
+            transition-duration: 0.4s;
+            width: 300px;
+            font-family: Arial, sans-serif;
+            box-sizing: border-box;
+            font-weight: bold !important;
+            outline: none;
+        }
+
+        div.stButton > button:hover {
+            background-color: #e0e0e0;
+            color: black;
+            border: 2px solid white;
+            font-weight: bold !important;
+        }
+
+        div.stButton > button:focus, 
+        div.stButton > button:active {
+            background-color: #B1ABA2;
+            color: black !important; /* Ensure text color remains white */
+            border: 2px solid white !important; /* Changed border color to white when clicked */
+            font-weight: bold !important;
+            outline: none;
+        }
+        </style>
+    """, unsafe_allow_html=True)
         if st.sidebar.button(page):  # If button clicked
             st.session_state["selected_page"] = page
-        st.sidebar.markdown(
-            f"""<div style="{button_style}"></div>""",
-            unsafe_allow_html=True
-        )
-
 
 # Render Sidebar Buttons
 st.sidebar.title("Navigation Menu")
@@ -316,8 +309,43 @@ elif selected_page == "Existing Customer":
 
 
     with col1:
-        st.markdown('<div class="section-title" >Choose the Recommendation Type</div>', unsafe_allow_html=True)
+        st.markdown('<div class="section-title">Choose the Recommendation Type</div>', unsafe_allow_html=True)
         selected_category_new = st.selectbox("Select a Category", options=list(categories.keys()))
+        st.markdown("""
+        <style>
+        div.stButton > button {
+            color: black;
+            padding: 10px 24px;
+            font-size: 16px;
+            font-weight: 700 !important;
+            border-radius: 12px;
+            border: 2px solid #4CAF50;
+            cursor: pointer;
+            transition-duration: 0.4s;
+            width: 300px;
+            font-family: Arial, sans-serif;
+            box-sizing: border-box;
+            font-weight: bold !important;
+            outline: none;
+        }
+
+        div.stButton > button:hover {
+            background-color: #e0e0e0;
+            color: black;
+            border: 2px solid white;
+            font-weight: bold !important;
+        }
+
+        div.stButton > button:focus, 
+        div.stButton > button:active {
+            background-color: #B1ABA2;
+            color: black !important; /* Ensure text color remains white */
+            border: 2px solid white !important; /* Changed border color to white when clicked */
+            font-weight: bold !important;
+            outline: none;
+        }
+        </style>
+    """, unsafe_allow_html=True)
         if st.button("Generate Recommendations"):
             if selected_category_new == "Multi-Modal Personalization":
                 st.markdown("---")
@@ -335,23 +363,23 @@ elif selected_page == "Existing Customer":
                     st.markdown(response, unsafe_allow_html=True)
                     #st.markdown(response.split("PROMPT ENDED:")[1].strip(), unsafe_allow_html=True)
             else:
-                with st.spinner("Generating recommendation..."):
-                    recommendations = recommendation_chain.invoke({
-                        "demographics": demo.drop("Customer_Id").to_dict(),
-                        "transactions": ", ".join(customer_trans['Category'].tolist()),
-                        "social_media": ", ".join(customer_social['Content'].tolist()),
-                        "category_prompt": categories[selected_category_new]
-                    })
-                st.success("✅ Recommendation Generated!")
-                st.subheader(f"📌 {selected_category_new}")
-                st.markdown(recommendations, unsafe_allow_html=True)
-                #st.markdown(recommendations.split("PROMPT ENDED:")[1].strip(), unsafe_allow_html=True)
+                with col2:
+                    with st.spinner("Generating recommendation..."):
+                        recommendations = recommendation_chain.invoke({
+                            "demographics": demo.drop("Customer_Id").to_dict(),
+                            "transactions": ", ".join(customer_trans['Category'].tolist()),
+                            "social_media": ", ".join(customer_social['Content'].tolist()),
+                            "category_prompt": categories[selected_category_new]
+                        })
+                    st.success("✅ Recommendation Generated!")
+                    st.subheader(f"📌 {selected_category_new}")
+                    st.markdown(recommendations.split("PROMPT ENDED:")[1].strip(), unsafe_allow_html=True)
 
 
 
 elif selected_page == "ChatBot":
 
-    st.markdown('<div class="section-title">Chat with a Bot</div>', unsafe_allow_html=True)
+    st.markdown('<div class="title-ribbon">Chat with a Bot</div>', unsafe_allow_html=True)
 
 
     class MyAudioProcessor(AudioProcessorBase):
@@ -374,7 +402,7 @@ elif selected_page == "ChatBot":
             return uploaded_file.read().decode()
 
 
-    text_prompt = st.text_area("", placeholder="Text Prompt")
+    text_prompt = st.text_area("Prompt your Text")
     file_upload = st.file_uploader("Upload File (pdf, docx, txt):", type=["pdf", "docx", "txt"])
 
     st.markdown("**🎙️ Record Audio:**")
@@ -383,7 +411,41 @@ elif selected_page == "ChatBot":
                           media_stream_constraints={"audio": True})
 
     chosen_model = st.radio("Model:", ["OpenAI GPT-3.5", "Hugging Face Mistral"])
+    st.markdown("""
+        <style>
+        div.stButton > button {
+            color: black;
+            padding: 10px 24px;
+            font-size: 16px;
+            font-weight: 700 !important;
+            border-radius: 12px;
+            border: 2px solid #4CAF50;
+            cursor: pointer;
+            transition-duration: 0.4s;
+            width: 300px;
+            font-family: Arial, sans-serif;
+            box-sizing: border-box;
+            font-weight: bold !important;
+            outline: none;
+        }
 
+        div.stButton > button:hover {
+            background-color: #e0e0e0;
+            color: black;
+            border: 2px solid white;
+            font-weight: bold !important;
+        }
+
+        div.stButton > button:focus, 
+        div.stButton > button:active {
+            background-color: #B1ABA2;
+            color: black !important; /* Ensure text color remains white */
+            border: 2px solid white !important; /* Changed border color to white when clicked */
+            font-weight: bold !important;
+            outline: none;
+        }
+        </style>
+    """, unsafe_allow_html=True)
     if st.button("Generate Chatbot Response"):
         context = text_prompt
         if file_upload:
