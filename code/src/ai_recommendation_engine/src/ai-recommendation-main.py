@@ -373,14 +373,13 @@ elif selected_page == "Existing Customer":
                         })
                     st.success("✅ Recommendation Generated!")
                     st.subheader(f"📌 {selected_category_new}")
-                    st.markdown(recommendations.split("PROMPT ENDED:")[1].strip(), unsafe_allow_html=True)
+                    #st.markdown(recommendations.split("PROMPT ENDED:")[1].strip(), unsafe_allow_html=True)
+                    st.markdown(recommendations, unsafe_allow_html=True)
 
 
 
 elif selected_page == "ChatBot":
-
     st.markdown('<div class="title-ribbon">Chat with a Bot</div>', unsafe_allow_html=True)
-
 
     class MyAudioProcessor(AudioProcessorBase):
         def __init__(self):
@@ -389,7 +388,6 @@ elif selected_page == "ChatBot":
         def recv(self, frame: av.AudioFrame) -> av.AudioFrame:
             self.frames.append(frame.to_ndarray())
             return frame
-
 
     def extract_text(uploaded_file):
         if uploaded_file.name.endswith('.pdf'):
@@ -401,8 +399,18 @@ elif selected_page == "ChatBot":
         else:
             return uploaded_file.read().decode()
 
+    st.markdown("**📌 Select an Example Prompt or Write Your Own:**")
+    example_prompts = [
+        "Suggest products that suit customers who primarily use {Payment Mode} for transactions.",
+        "Suggest the best products for a {Age}-year-old {gender} who prefers {Preferences} shopping and is interested in {Interests}.",
+        "Recommend trending items for customers who frequently purchase from the {Category} category.",
+        "What are the best fashion brands for a customer who has previously shopped at {Merchant Name}?",
+        "Suggest high-value products for customers who prefer {Transaction Type} purchases.",
+        "What are the best payment plans for a customer who has used {Payment Mode} multiple times?"
+    ]
+    selected_prompt = st.selectbox("Choose a sample prompt: ", ["Custom"] + example_prompts)
 
-    text_prompt = st.text_area("Prompt your Text")
+    text_prompt = st.text_area("Or type your own prompt:", "" if selected_prompt == "Custom" else selected_prompt)
     file_upload = st.file_uploader("Upload File (pdf, docx, txt):", type=["pdf", "docx", "txt"])
 
     st.markdown("**🎙️ Record Audio:**")
@@ -411,6 +419,7 @@ elif selected_page == "ChatBot":
                           media_stream_constraints={"audio": True})
 
     chosen_model = st.radio("Model:", ["OpenAI GPT-3.5", "Hugging Face Mistral"])
+
     st.markdown("""
         <style>
         div.stButton > button {
@@ -439,13 +448,14 @@ elif selected_page == "ChatBot":
         div.stButton > button:focus, 
         div.stButton > button:active {
             background-color: #B1ABA2;
-            color: black !important; /* Ensure text color remains white */
-            border: 2px solid white !important; /* Changed border color to white when clicked */
+            color: black !important;
+            border: 2px solid white !important;
             font-weight: bold !important;
             outline: none;
         }
         </style>
     """, unsafe_allow_html=True)
+
     if st.button("Generate Chatbot Response"):
         context = text_prompt
         if file_upload:
@@ -460,5 +470,13 @@ elif selected_page == "ChatBot":
             )
             st.write(response.choices[0].message.content)
         else:
-            response = llm(context)
-            st.write(response)
+            response = openai_client.chat.completions.create(
+                model="gpt-3.5-turbo",
+                messages=[{"role": "user", "content": context}],
+                temperature=0.7
+            )
+            #st.write(response.choices[0].message.content)
+            #hf_pipe = pipeline("text-generation", model="mistralai/Mistral-7B-Instruct-v0.1")
+            #result = hf_pipe(context, max_new_tokens=500)[0]['generated_text']
+            #st.write(result)
+

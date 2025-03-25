@@ -179,7 +179,7 @@ with tab3:
                 messages=[{"role": "user", "content": context}],
                 temperature=0.7
             )
-            st.write(response.choices[0].message.content)
+            st.write(response.message.content)
         else:
             hf_pipe = pipeline("text-generation", model="mistralai/Mistral-7B-Instruct-v0.1")
             result = hf_pipe(context, max_new_tokens=500)[0]['generated_text']
