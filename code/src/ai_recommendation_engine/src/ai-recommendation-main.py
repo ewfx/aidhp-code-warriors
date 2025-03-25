@@ -12,10 +12,10 @@ from huggingface_hub import login
 from langchain_community.llms import HuggingFaceHub
 import os
 import PyPDF2, docx, tempfile, soundfile as sf, av, numpy as np
-from transformers import pipeline
+
 from openai import OpenAI
-from config import load_config
-from data_loader import load_customer_data
+from configuration.config import load_config
+from dataloader.data_loader import load_customer_data
 from prompts.templates import base_template
 from prompts.templates import categories
 from streamlit_webrtc import webrtc_streamer, WebRtcMode, AudioProcessorBase
@@ -28,7 +28,7 @@ openai_api_key = config['openai']['api_key']
 # OpenAI setup
 openai_client = OpenAI(api_key=openai_api_key)
 # Login to Hugging Face
-login(hf_api_key)
+# login(hf_api_key)
 os.environ["HUGGINGFACEHUB_API_TOKEN"] = hf_api_key
 
 # Initialize Hugging Face LLM
@@ -398,6 +398,5 @@ elif selected_page == "ChatBot":
             )
             st.write(response.choices[0].message.content)
         else:
-            hf_pipe = pipeline("text-generation", model="mistralai/Mistral-7B-Instruct-v0.1")
-            result = hf_pipe(context, max_new_tokens=500)[0]['generated_text']
-            st.write(result)
+            response = llm(context)
+            st.write(response)
