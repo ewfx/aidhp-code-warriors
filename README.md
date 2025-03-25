@@ -81,7 +81,6 @@ Ensure you have the following installed:
 - **Other**: Google Cloud Run, WebRTC
 
 ## 👥 Team
-- **Code Warriors**
 - **Veerabhadra Dharmapuri**
 - **Mounika Boorugu**
 - **Phaninder Pathri**
