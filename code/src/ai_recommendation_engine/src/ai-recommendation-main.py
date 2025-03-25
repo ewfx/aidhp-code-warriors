@@ -210,7 +210,7 @@ if selected_page == "New Customer":
         st.markdown('<div class="section-title">Transaction Info</div>', unsafe_allow_html=True)
         with st.expander("Expand to Enter Transaction Details"):
             trans_input = st.text_area("Transaction Details", placeholder="Enter transaction details")
-        st.markdown('<div class="section-title">Social Media Info</div>', unsafe_allow_html=True)
+        st.markdown('<div class="section-title">Social Media Activity</div>', unsafe_allow_html=True)
         with st.expander("Expand to Enter Social Media Activity"):
             social_input = st.text_area("Social Media Activity", placeholder="Enter social media activity")
 
