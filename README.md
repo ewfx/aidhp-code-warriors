@@ -17,11 +17,20 @@
 This project is a **Streamlit-based AI-powered customer recommendation engine** that analyzes **transaction history, social media activity, and demographic details** to generate personalized recommendations using **Hugging Face Mistral-7B** and **OpenAI GPT-3.5**.
 
 ## 🎥 Demo
-🔗 [Live Demo](#) (if applicable)  
-📹 [Video Demo](#) (if applicable)  
-🖼️ Screenshots:
+🔗 [Live Demo](#)   https://ai-recommendations-app-214533529948.us-central1.run.app/
 
-![Screenshot 1](link-to-image)
+📹 [Video Demo](#) (if applicable)  
+
+🖼️ Screenshots:
+![img_1.png](img_1.png)
+![img.png](img.png)
+![img_2.png](img_2.png)
+![img_3.png](img_3.png)
+🖼️ Test Evidences:
+
+⚙️ Architecture Diagram:
+![Architecture_AI_Recommendation.png](artifacts%2Farch%2FArchitecture_AI_Recommendation.png)
+
 
 ## 💡 Inspiration
 The project was inspired by the need for **data-driven customer engagement** in e-commerce and finance, providing AI-driven product and service recommendations.
