@@ -22,8 +22,8 @@ This project is a **Streamlit-based AI-powered customer recommendation engine** 
 📹 [Video Demo](#) (if applicable)  
 
 🖼️ Screenshots:
-![img_1.png](img_1.png)
 ![img.png](img.png)
+![img_5.png](img_5.png)
 ![img_2.png](img_2.png)
 ![img_3.png](img_3.png)
 🖼️ Test Evidences:
