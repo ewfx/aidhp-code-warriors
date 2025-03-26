@@ -132,7 +132,7 @@ if "selected_page" not in st.session_state:
 # Sidebar Buttons Helper Function
 def render_sidebar_buttons():
     # Sidebar buttons logic
-    pages = ["New Customer", "Existing Customer", "ChatBot"]
+    pages = ["New Customer", "Existing Customer", "Recommendo AI"]
     for page in pages:
         st.markdown("""
         <style>
@@ -234,7 +234,7 @@ if selected_page == "New Customer":
         selected_category = st.selectbox("Select a Category:", options=list(categories.keys()))
 
         if st.button("Generate Recommendations"):
-            st.success("Generating ...")
+
             if selected_category == "Multi-Modal Personalization":
                 st.subheader("🧠 Chatbot Interaction Mode for Multi-Modal Personalization")
                 user_text = st.text_input("💬 Describe your financial goals, lifestyle, or any preferences:",
@@ -378,8 +378,8 @@ elif selected_page == "Existing Customer":
 
 
 
-elif selected_page == "ChatBot":
-    st.markdown('<div class="title-ribbon">Chat with a Bot</div>', unsafe_allow_html=True)
+elif selected_page == "Recommendo AI":
+    st.markdown('<div class="title-ribbon">Recommendo AI</div>', unsafe_allow_html=True)
 
     class MyAudioProcessor(AudioProcessorBase):
         def __init__(self):
@@ -475,7 +475,7 @@ elif selected_page == "ChatBot":
                 messages=[{"role": "user", "content": context}],
                 temperature=0.7
             )
-            #st.write(response.choices[0].message.content)
+            st.write(response.choices[0].message.content)
             #hf_pipe = pipeline("text-generation", model="mistralai/Mistral-7B-Instruct-v0.1")
             #result = hf_pipe(context, max_new_tokens=500)[0]['generated_text']
             #st.write(result)
