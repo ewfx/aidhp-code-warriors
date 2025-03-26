@@ -80,7 +80,7 @@ Ensure you have the following installed:
    ```
 4. Run the application:
    ```sh
-   streamlit run streamlitui.py
+   streamlit run ai-recommendation-main.py
    ```
 
 ## 🏗️ Tech Stack
